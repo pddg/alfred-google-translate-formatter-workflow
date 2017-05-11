@@ -1,0 +1,35 @@
+os: osx
+osx_image: xcode8.3
+
+language: go
+go:
+  - 1.8.x
+
+before_install:
+  - brew install glide
+
+install:
+  - glide install
+
+script:
+  - go vet -v $(glide novendor)
+  - go test -v $(glide novendor)
+
+before_deploy:
+  - go build
+  - mkdir -p $TRAVIS_BUILD_DIR/dist
+  - mv go-alfred-sentence-splitter $TRAVIS_BUILD_DIR/dist/
+  - cp resources/* $TRAVIS_BUILD_DIR/dist/
+  - cd $TRAVIS_BUILD_DIR/dist
+  - zip sentence-splitter.alfredworkflow ./*
+
+deploy:
+  provider: releases
+  api_key:
+    secure: uGmqaIW24BTFhnIF5vNdMR/MGCVoiSifIDIC4br/m/wfobAqdPO6+L5/QZSBaKRZu2Fd8weTTlEf1t8aCnzs5euDSweHA/wA6U7bX8W6kpg4yw78ZgHF/nvRr0fRxik92+/axgRbADugdpf9GdK0sGlE9wxeeNntJJ3tosc+ufg6RciCqBFTUJTxqAw+bQTi6DkaMAWgFKpff1Aivrju+MIrvUADyajQB6Pmf8uF0rXIRVkE3mg9PgAC5fsreO3lHORT/0Zw+a5W304LpilLCa9I/x/Lj93zOFRng87bnhOIqaVpnpiBcM9Z8ZXuguxbKLnM5w3WoMUKAcfIpV4DOCYgq3yAI4wTa7RGmLoEEgIKLi/DwT7fEzWJ4CmMktiuHKppwjFbYqOtHTFMZcpphqv8GXVCA5i3Cd1g0VIDd/sKQv0Iq8lwWYkI103fIMsqVVhyfaVvjtFyJLbeBGB4Ol3Q81cKo4hfG56eC21rK73jYw8HjPgjMu5fmlqrRYiWToRaogmcX5B+bY5rQTiRP/PSJXHgG50VAUloOePFZdLw7wep1S1dFOXa8oOg/ZFsvCDkqaoFM6ly8Y+tywk4Nu/enCCFdGjgLIqueU18UwmDe6PjAnLTtrFKpASUQvnzFydYRibM/67EQ0tIcmIlgcU+LfBefeuPtkDr6mEbS+w=
+  file: '$TRAVIS_BUILD_DIR/dist/sentence-splitter.alfredworkflow'
+  skip_cleanup: true
+  on:
+    tags: true
+    repo: pddg/go-alfred-sentence-splitter
+    condition: "$TRAVIS_TAG =~ ^v[0-9].*$"

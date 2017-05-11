@@ -1,0 +1,4 @@
+package: github.com/pddg/go-alfred-sentence-splitter
+import:
+  - package: github.com/urfave/cli
+  - package: golang.org/x/text/unicode/norm

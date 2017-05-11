@@ -1,0 +1,10 @@
+hash: ca61099e88cfdaf2dd527286d2e9420689f4d4f907a249153a04f38ae3f664d5
+updated: 2017-05-09T13:27:23.598366973+09:00
+imports:
+- name: github.com/urfave/cli
+  version: 8ba6f23b6e36d03666a14bd9421f5e3efcb59aca
+- name: golang.org/x/text
+  version: f4b4367115ec2de254587813edaa901bc1c723a8
+  subpackages:
+  - unicode/norm
+testImports: []

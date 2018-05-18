@@ -10,11 +10,11 @@ import (
 	"unicode"
 )
 
-var version = "0.1.0"
-var newLine = regexp.MustCompile(`\r?\n`)
+var version = "0.1.1"
+var newLine = regexp.MustCompile(`(\r?\n)+`)
 var refNumber = regexp.MustCompile(`\(([0-9]+(–[0-9]+)*(, )?)+\)( )?`)
 var duplicateWhiteSpace = regexp.MustCompile(`( ){2,}`)
-var hyphenAtEnd = regexp.MustCompile(`-([^\S]+|\n)`)
+var hyphenAtEnd = regexp.MustCompile(`-([^\S]+|(\r?\n))`)
 var endOfSentence = regexp.MustCompile(`[?!.]`)
 var emptyErrorMsg = `NSaYw3'D2o,W1eL_|ac\`
 

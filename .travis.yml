@@ -10,7 +10,7 @@ cache:
     - $GOPATH/pkg/dep
 
 before_install:
-  - brew install dep
+  - curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
 
 install:
   - make deps

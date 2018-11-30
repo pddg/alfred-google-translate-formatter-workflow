@@ -44,7 +44,7 @@ release: test
 		echo "'$(VER)' is invalid. Please call this like 'make release VER=v0.0.0'"; \
 		exit 1; \
 	fi
-	sed -i '' -e "/.*>version<.*/{n;s/v?[0-9]\.[0-9]\.[0-9]/$(VER)/;}" $(PLIST)
+	sed -i '' -e "/.*>version<.*/{n;s/v[0-9]\.[0-9]\.[0-9]/$(VER)/;}" $(PLIST)
 	git add $(PLIST)
 	git commit -m 'Release $(VER)'
 	git tag $(VER)

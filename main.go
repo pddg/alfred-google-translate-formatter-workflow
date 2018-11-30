@@ -3,11 +3,12 @@ package main
 import (
 	"bytes"
 	"fmt"
-	"github.com/urfave/cli"
-	"golang.org/x/text/unicode/norm"
 	"os"
 	"regexp"
 	"unicode"
+
+	"github.com/urfave/cli"
+	"golang.org/x/text/unicode/norm"
 )
 
 var version = "0.1.1"
@@ -66,12 +67,12 @@ func split(sentence string) string {
 		}
 		mode := firstCharType(rs)
 		switch mode {
-			case 0:
-				// Nothing to do
-			case 1:
-				buffer.WriteString("\n\n")
-			default:
-				buffer.WriteString(" ")
+		case 0:
+			// Nothing to do
+		case 1:
+			buffer.WriteString("\n\n")
+		default:
+			buffer.WriteString(" ")
 		}
 		buffer.WriteString(s)
 	}

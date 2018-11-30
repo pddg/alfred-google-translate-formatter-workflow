@@ -151,7 +151,7 @@
 				<key>spaces</key>
 				<string></string>
 				<key>url</key>
-				<string>https://translate.google.com/?text=√#en/ja/{query}</string>
+				<string>https://translate.google.co.jp/?hl=ja&amp;op=translate&amp;sl=en&amp;tl=ja&amp;text={query}</string>
 				<key>utf8</key>
 				<true/>
 			</dict>
@@ -249,11 +249,9 @@
 				<key>focusedappvariablename</key>
 				<string></string>
 				<key>hotkey</key>
-				<integer>8</integer>
+				<integer>0</integer>
 				<key>hotmod</key>
-				<integer>1310720</integer>
-				<key>hotstring</key>
-				<string>C</string>
+				<integer>0</integer>
 				<key>leftcursor</key>
 				<false/>
 				<key>modsmode</key>
@@ -415,7 +413,7 @@ Split sentence.</string>
 		</dict>
 	</dict>
 	<key>version</key>
-	<string>0.1.1</string>
+	<string>v0.1.1</string>
 	<key>webaddress</key>
 	<string>https://www.poyo.info/</string>
 </dict>

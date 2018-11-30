@@ -1,27 +1,25 @@
 os: osx
-osx_image: xcode8.3
+osx_image: xcode10.1
 
 language: go
 go:
-  - 1.8.x
+  - 1.10.x
+
+cache:
+  directories:
+    - $GOPATH/pkg/dep
 
 before_install:
-  - brew install glide
+  - brew install dep
 
 install:
-  - glide install
+  - make deps
 
 script:
-  - go vet -v $(glide novendor)
-  - go test -v $(glide novendor)
+  - make build
 
 before_deploy:
-  - go build
-  - mkdir -p $TRAVIS_BUILD_DIR/dist
-  - mv go-alfred-sentence-splitter $TRAVIS_BUILD_DIR/dist/
-  - cp resources/* $TRAVIS_BUILD_DIR/dist/
-  - cd $TRAVIS_BUILD_DIR/dist
-  - zip sentence-splitter.alfredworkflow ./*
+  - make package
 
 deploy:
   provider: releases
@@ -32,4 +30,9 @@ deploy:
   on:
     tags: true
     repo: pddg/go-alfred-sentence-splitter
-    condition: "$TRAVIS_TAG =~ ^v[0-9].*$"
+    condition: "$TRAVIS_TAG =~ ^v([0-9]\.){2}[0-9]$"
+
+notifications:
+  email:
+    on_failure: always
+

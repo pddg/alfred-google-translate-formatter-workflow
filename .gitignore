@@ -1,3 +1,4 @@
 vendor
+dist
 .DS_Store
 go-alfred-sentence-splitter

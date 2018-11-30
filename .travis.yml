@@ -13,12 +13,10 @@ before_install:
   - brew install dep
 
 install:
-  - dep ensure -vendor-only
+  - make deps
 
 script:
-  - go vet -v ./...
-  - go test -v ./...
-  - go build .
+  - make build
 
 before_deploy:
   - mkdir -p $TRAVIS_BUILD_DIR/dist
@@ -36,7 +34,7 @@ deploy:
   on:
     tags: true
     repo: pddg/go-alfred-sentence-splitter
-    condition: "$TRAVIS_TAG =~ ^v[0-9].*$"
+    condition: "$TRAVIS_TAG =~ ^v([0-9]\.){2}[0-9]$"
 
 notifications:
   email:

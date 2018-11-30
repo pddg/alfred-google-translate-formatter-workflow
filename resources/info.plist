@@ -151,7 +151,7 @@
 				<key>spaces</key>
 				<string></string>
 				<key>url</key>
-				<string>https://translate.google.com/?text=√#en/ja/{query}</string>
+                <string>https://translate.google.co.jp/?hl=ja&op=translate&sl=en&tl=ja&text={query}</string>
 				<key>utf8</key>
 				<true/>
 			</dict>

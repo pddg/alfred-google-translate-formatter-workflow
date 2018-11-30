@@ -37,3 +37,8 @@ deploy:
     tags: true
     repo: pddg/go-alfred-sentence-splitter
     condition: "$TRAVIS_TAG =~ ^v[0-9].*$"
+
+notifications:
+  email:
+    on_failure: always
+

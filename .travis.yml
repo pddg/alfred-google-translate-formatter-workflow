@@ -19,11 +19,7 @@ script:
   - make build
 
 before_deploy:
-  - mkdir -p $TRAVIS_BUILD_DIR/dist
-  - mv go-alfred-sentence-splitter $TRAVIS_BUILD_DIR/dist/
-  - cp resources/* $TRAVIS_BUILD_DIR/dist/
-  - cd $TRAVIS_BUILD_DIR/dist
-  - zip sentence-splitter.alfredworkflow ./*
+  - make package
 
 deploy:
   provider: releases

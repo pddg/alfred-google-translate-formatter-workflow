@@ -10,6 +10,7 @@ cache:
     - $GOPATH/pkg/dep
 
 before_install:
+  - mkdir -p /Users/travis/gopath/bin
   - curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
 
 install:

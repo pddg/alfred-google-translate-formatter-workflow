@@ -33,11 +33,7 @@ test-only: $(SRCS)
 test: lint test-only ;
 
 deps:
-	@if ! type dep > /dev/null 2>&1; then\
-		echo "Try to install dep..."; \
-    	curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh;\
-	fi
-	dep ensure -vendor-only
+	go mod download
 
 release: test
 	@if [[ ! "$(VER)" =~ ^v([0-9]\.){2}[0-9]$$ ]]; then \

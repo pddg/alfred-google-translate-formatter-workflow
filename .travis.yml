@@ -3,15 +3,14 @@ osx_image: xcode10.1
 
 language: go
 go:
-  - 1.10.x
+  - 1.12.x
+
+env:
+  - GO111MODULE=on
 
 cache:
   directories:
     - $GOPATH/pkg/dep
-
-before_install:
-  - mkdir -p /Users/travis/gopath/bin
-  - curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
 
 install:
   - make deps

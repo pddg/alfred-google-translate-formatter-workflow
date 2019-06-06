@@ -20,11 +20,6 @@ var expectedWhitespaceRemoved = `This is a test sentence of go-alfred-sentence-s
  you sholud write unittest too. CI (Continuous Integration) is important too. Both systems will save
  your codes' quality. written by Pudding`
 
-var expectedRefNumberRemoved = `This is a test sentence of go-alfred-sentence-splitter. Unittest is very im-
- portant for software. It is not only testing system, but the easiest way . So if you write code,
- you sholud write unittest too. CI (Continuous Integration) is important too. Both systems will save
- your codes' quality.  written by Pudding`
-
 var expectedSplit = `This is a test sentence of go-alfred-sentence-splitter.
 
  Unittest is very im- portant for software.
@@ -55,13 +50,6 @@ func TestRemoveEndHyphen(t *testing.T) {
 	result := removeEndHyphen(testSentence)
 	if result != expectedHyphenRemoved {
 		outputError("removeEndHyphen", expectedHyphenRemoved, result, t)
-	}
-}
-
-func TestRemoveRefNumber(t *testing.T) {
-	result := removeRefNum(testSentence)
-	if result != expectedRefNumberRemoved {
-		outputError("removeRefNum", expectedRefNumberRemoved, result, t)
 	}
 }
 

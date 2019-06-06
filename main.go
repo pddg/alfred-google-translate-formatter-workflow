@@ -13,7 +13,6 @@ import (
 
 var version = "0.1.1"
 var newLine = regexp.MustCompile(`(\r?\n)+`)
-var refNumber = regexp.MustCompile(`\(([0-9]+(–[0-9]+)*(, )?)+\)( )?`)
 var duplicateWhiteSpace = regexp.MustCompile(`( ){2,}`)
 var hyphenAtEnd = regexp.MustCompile(`-([^\S]+|(\r?\n))`)
 var endOfSentence = regexp.MustCompile(`[?!.]`)
@@ -22,17 +21,17 @@ var emptyErrorMsg = `NSaYw3'D2o,W1eL_|ac\`
 func main() {
 	app := cli.NewApp()
 	app.Name = "go-alfred-sentence-splitter"
-	app.Usage = "Remove all `\n` in the sentence and then separate by period and remove reference number."
+	app.Usage = "Remove all `\\n` in the sentence and then separate by period and remove reference number."
 	app.Version = version
 	app.Commands = []cli.Command{
 		{
 			Name:   "split",
-			Usage:  "Remove `\n` and split sentence by period.",
+			Usage:  "Remove `\\n` and split sentence by period.",
 			Action: common,
 		},
 		{
 			Name:   "reshape",
-			Usage:  "Just remove `\n` and referense number ...etc",
+			Usage:  "Just remove `\\n` ...etc",
 			Action: common,
 		},
 	}
@@ -44,7 +43,6 @@ func common(c *cli.Context) {
 	res = norm.NFC.String(c.Args().First())
 	res = removeEndHyphen(res)
 	res = removeNewLine(res)
-	res = removeRefNum(res)
 	res = removeConsecutiveWhiteSpace(res)
 	if len([]rune(res)) < 2 {
 		fmt.Print(emptyErrorMsg)
@@ -117,10 +115,6 @@ func removeNewLine(sentence string) string {
 
 func removeEndHyphen(sentence string) string {
 	return hyphenAtEnd.ReplaceAllString(sentence, "")
-}
-
-func removeRefNum(sentence string) string {
-	return refNumber.ReplaceAllString(sentence, "")
 }
 
 func removeConsecutiveWhiteSpace(sentence string) string {

@@ -11,7 +11,7 @@ import (
 	"golang.org/x/text/unicode/norm"
 )
 
-var version = "0.3.0"
+var version = "1.0.0"
 var newLine = regexp.MustCompile(`(\r?\n)+`)
 var duplicateWhiteSpace = regexp.MustCompile(`( ){2,}`)
 var hyphenAtEnd = regexp.MustCompile(`-([^\S]+|(\r?\n))`)

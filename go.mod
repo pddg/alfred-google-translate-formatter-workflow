@@ -1,6 +1,6 @@
 module github.com/pddg/alfred-google-translate-formatter-workflow
 
-go 1.13
+go 1.12
 
 require (
 	github.com/urfave/cli v1.20.0

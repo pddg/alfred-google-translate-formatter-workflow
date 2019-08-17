@@ -20,8 +20,8 @@ var emptyErrorMsg = `NSaYw3'D2o,W1eL_|ac\`
 
 func main() {
 	app := cli.NewApp()
-	app.Name = "go-alfred-sentence-splitter"
-	app.Usage = "Remove all `\\n` in the sentence and then separate by period and remove reference number."
+	app.Name = "google-translate-formatter"
+	app.Usage = "Remove all `\\n` in the sentence and then separate by period."
 	app.Version = version
 	app.Commands = []cli.Command{
 		{

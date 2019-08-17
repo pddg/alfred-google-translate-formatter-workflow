@@ -16,7 +16,7 @@ build: test $(BUILT_TARGET) ;
 
 $(BUILT_TARGET): $(SRCS)
 	@echo "Build $(NAME) $(VERSION)"
-	go build $(LDFLAGS) .
+	GO111MODULE=on go build $(LDFLAGS) -o google-translate-formatter .
 
 clean:
 	rm -f $(BUILT_TARGET)

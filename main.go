@@ -16,7 +16,9 @@ var newLine = regexp.MustCompile(`(\r?\n)+`)
 var duplicateWhiteSpace = regexp.MustCompile(`( ){2,}`)
 var hyphenAtEnd = regexp.MustCompile(`-([^\S]+|(\r?\n))`)
 var endOfSentence = regexp.MustCompile(`[?!.]`)
+var lengthThreshold = 5000
 var emptyErrorMsg = `NSaYw3'D2o,W1eL_|ac\`
+var tooLongErrorMsg = `CPU8y2_Fo_DBqAoDCfps`
 
 func main() {
 	app := cli.NewApp()
@@ -51,6 +53,10 @@ func common(c *cli.Context) {
 	if c.Command.Name == "split" {
 		res = split(res)
 	}
+    if len(res) > lengthThreshold {
+        fmt.Print(tooLongErrorMsg)
+		os.Exit(1)
+    }
 	fmt.Print(res)
 }
 

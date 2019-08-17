@@ -1,7 +1,7 @@
 SHELL   := /bin/bash
 
-NAME    := go-alfred-sentence-splitter
-PACKAGE := sentence-splitter.alfredworkflow
+NAME    := google-translate-formatter
+PACKAGE := $(NAME).alfredworkflow
 PLIST   := resources/info.plist
 SRCS    := $(shell go list -f {{.Dir}} ./... | grep -v /vendor/)
 VERSION := $(shell git describe --tag --abbrev=0 || echo "v0.0.0")
@@ -16,7 +16,7 @@ build: test $(BUILT_TARGET) ;
 
 $(BUILT_TARGET): $(SRCS)
 	@echo "Build $(NAME) $(VERSION)"
-	GO111MODULE=on go build $(LDFLAGS) -o google-translate-formatter .
+	GO111MODULE=on go build $(LDFLAGS) -o $(NAME) .
 
 clean:
 	rm -f $(BUILT_TARGET)
@@ -36,17 +36,17 @@ deps:
 	go mod download
 
 release: test
-	@if [[ ! "$(VER)" =~ ^v([0-9]\.){2}[0-9]$$ ]]; then \
-		echo "'$(VER)' is invalid. Please call this like 'make release VER=v0.0.0'"; \
+	@if [[ ! "$(VER)" =~ ^([0-9]\.){2}[0-9]$$ ]]; then \
+		echo "'$(VER)' is invalid. Please call this like 'make release VER=0.0.0'"; \
 		exit 1; \
 	fi
-	sed -i '' -e "/.*>version<.*/{n;s/v[0-9]\.[0-9]\.[0-9]/$(VER)/;}" $(PLIST)
+	sed -i '' -e "/.*>version<.*/{n;s/v?[0-9]\.[0-9]\.[0-9]/$(VER)/;}" $(PLIST)
 	git add $(PLIST)
-	git commit -m 'Release $(VER)'
-	git tag $(VER)
+	git commit -m 'Release v$(VER)'
+	git tag v$(VER)
 	# Push this release to remote, please type following command
 	# $ git push origin $(VER)
-	@echo "$(VER)  [OK]"
+	@echo "v$(VER)  [OK]"
 
 $(PACKAGE): $(BUILT_TARGET)
 	@if [ ! -d ./dist ]; then \

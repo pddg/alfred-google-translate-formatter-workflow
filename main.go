@@ -37,7 +37,9 @@ func main() {
 			Action: common,
 		},
 	}
-	app.Run(os.Args)
+	if err := app.Run(os.Args); err != nil {
+		fmt.Fprintf(os.Stderr, "Error: %v\n", err)
+	}
 }
 
 func common(c *cli.Context) {
@@ -53,10 +55,10 @@ func common(c *cli.Context) {
 	if c.Command.Name == "split" {
 		res = split(res)
 	}
-    if len(res) > lengthThreshold {
-        fmt.Print(tooLongErrorMsg)
+	if len(res) > lengthThreshold {
+		fmt.Print(tooLongErrorMsg)
 		os.Exit(1)
-    }
+	}
 	fmt.Print(res)
 }
 

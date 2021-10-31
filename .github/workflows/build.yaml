@@ -50,6 +50,8 @@ jobs:
           ls -l dist/*.alfredworkflow
       - name: Publish
         if: ${{ github.event_name != 'pull_request' }}
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           TAG=v$(cat VERSION)
           if git show-ref --tags | grep -q "refs/tags/${TAG}"

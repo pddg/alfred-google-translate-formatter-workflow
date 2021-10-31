@@ -51,6 +51,7 @@ $(PACKAGE): $(BUILT_TARGET) VERSION | $(DISTDIR)
 	$(eval VER=$(shell cat VERSION))
 	cp $(NAME) $(TMPDIR)/google-translate-formatter
 	cp resources/* $(TMPDIR)/
+	cp LICENSE $(TMPDIR)/
 	sed -e "/.*>version<.*/{n;s/[0-9]\.[0-9]\.[0-9]/$(VER)/;}" resources/info.plist > $(TMPDIR)/info.plist
 	cd $(TMPDIR) && zip $(PACKAGE) ./*
 	rm -rf $(TMPDIR)

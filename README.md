@@ -1,5 +1,7 @@
 # Google Translate Formatter
 
+[![Build](https://github.com/pddg/alfred-google-translate-formatter-workflow/actions/workflows/build.yaml/badge.svg)](https://github.com/pddg/alfred-google-translate-formatter-workflow/actions/workflows/build.yaml)
+
 論文読むときに単語途中改行とかでGoogle翻訳にぶち込んだとき変になるのを抑制する．
 
 ## Install

@@ -2,3 +2,5 @@ vendor
 dist
 .DS_Store
 google-translate-formatter
+/.cache
+/bin

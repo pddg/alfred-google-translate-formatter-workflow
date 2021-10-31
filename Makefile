@@ -3,10 +3,15 @@ SHELL   := /bin/bash
 NAME    := google-translate-formatter
 PACKAGE := $(NAME).alfredworkflow
 PLIST   := resources/info.plist
-SRCS    := $(shell go list -f {{.Dir}} ./... | grep -v /vendor/)
+SRCS    := $(wildcard *.go) go.mod go.sum
 VERSION := $(shell git describe --tag --abbrev=0 || echo "v0.0.0")
 REVISION:= $(shell git rev-parse --short HEAD || echo "In-Development")
 LDFLAGS := -ldflags="-s -w -X \"main.version=$(VERSION)-$(REVISION)\" -extldflags \"-static\""
+
+BINDIR := $(CURDIR)/bin
+CACHEDIR := $(CURDIR)/.cache
+GOLANGCI_LINT := $(BINDIR)/golangci-lint 
+GOLANGCI_LINT_VERSION := 1.42.1
 
 BUILT_TARGET := $(NAME)
 
@@ -23,9 +28,18 @@ clean:
 
 rebuild: clean build ;
 
-lint: $(SRCS)
-	go vet -v ./...
-	goimports -d $(SRCS) | tee /dev/stderr
+$(BINDIR) $(CACHEDIR):
+	mkdir $@
+
+$(CACHEDIR)/golangci-lint-$(GOLANGCI_LINT_VERSION): | $(CACHEDIR)
+	GOBIN=$(CACHEDIR) go install github.com/golangci/golangci-lint/cmd/golangci-lint@v$(GOLANGCI_LINT_VERSION)
+	mv $(CACHEDIR)/golangci-lint $@
+
+$(GOLANGCI_LINT): $(CACHEDIR)/golangci-lint-$(GOLANGCI_LINT_VERSION) | $(BINDIR)
+	ln -sf $< $@
+
+lint: $(GOLANGCI_LINT)
+	$(GOLANGCI_LINT) run ./...
 
 test-only: $(SRCS)
 	go test -v ./...
@@ -58,6 +72,6 @@ $(PACKAGE): $(BUILT_TARGET)
 
 package: $(PACKAGE) ;
 
-all: dev test build ;
+all: build ;
 
 .PHONY: build rebuild clean lint test-only test deps package ;

@@ -40,12 +40,14 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v2
       - uses: actions/download-artifact@v2
         with:
           name: alfredworkflow
+          path: dist/
       - name: Following artifacts will be published
         run: |
-          ls -l *.alfredworkflow
+          ls -l dist/*.alfredworkflow
       - name: Publish
         if: ${{ github.event_name != 'pull_request' }}
         run: |
@@ -56,5 +58,5 @@ jobs:
           else
             git tag ${TAG}
             git push --tags
-            gh release create ${TAG} -n "${TAG}" ./*.alfredworkflow
+            gh release create ${TAG} -n "${TAG}" dist/*.alfredworkflow
           fi
